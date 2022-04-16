@@ -30,6 +30,8 @@ public:
     void setStartPoint(const QPointF point);
     void setEndPoint(const QPointF point);
 
+    virtual Figure* Copy(QPointF point) = 0;
+
 signals:
     void pointChanged();
 
@@ -49,6 +51,8 @@ private:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
     QRectF boundingRect() const;
+
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) = 0;
 
 public slots:
     void updateRomb();

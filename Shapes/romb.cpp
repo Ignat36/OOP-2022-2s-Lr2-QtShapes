@@ -12,6 +12,11 @@ Romb::~Romb()
 
 }
 
+Figure* Romb::Copy(QPointF point)
+{
+    return new Romb(point);
+}
+
 void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(QPen(Qt::black, 2));

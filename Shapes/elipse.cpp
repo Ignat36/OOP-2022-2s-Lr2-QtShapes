@@ -12,6 +12,11 @@ Elipse::~Elipse()
 
 }
 
+Figure* Elipse::Copy(QPointF point)
+{
+    return new Elipse(point);
+}
+
 // Реализуем метод отрисовки
 void Elipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {

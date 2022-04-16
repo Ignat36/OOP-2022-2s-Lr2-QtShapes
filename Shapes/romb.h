@@ -16,9 +16,11 @@ public:
     explicit Romb(QPointF point, QObject *parent = 0);
     ~Romb();
 
+    Figure* Copy(QPointF point) override;
+
 private:
     // Для Ромба реализуем только саму отрисовку
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 };
 
 #endif // ROMB_H

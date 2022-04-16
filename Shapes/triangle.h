@@ -13,8 +13,10 @@ public:
     explicit Triangle(QPointF point, QObject *parent = 0);
     ~Triangle();
 
+    Figure* Copy(QPointF point) override;
+
 private:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 };
 
 #endif // TRIANGLE_H

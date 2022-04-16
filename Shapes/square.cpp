@@ -12,6 +12,11 @@ Square::~Square()
 
 }
 
+Figure* Square::Copy(QPointF point)
+{
+    return new Square(point);
+}
+
 void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(QPen(Qt::black, 2));

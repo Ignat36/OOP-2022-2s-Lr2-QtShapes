@@ -8,38 +8,30 @@
 #include <QVector>
 #include <QCursor>
 #include <qmath.h>
+#include <vector>
 #include "figure.h"
+#include "romb.h"
+#include "triangle.h"
+#include "square.h"
+#include "elipse.h"
 
 class PaintScene : public QGraphicsScene
 {
     Q_OBJECT
-    // Свойство текущего типа используемой фигуры
-    Q_PROPERTY(int typeFigure
-               READ typeFigure WRITE setTypeFigure
-               NOTIFY typeFigureChanged)
 
 public:
     explicit PaintScene(QObject *parent = 0);
     ~PaintScene();
 
-    int typeFigure() const;                 // Возвращение текщего типа
-    void setTypeFigure(const int type);     // Установка текущего типа
-
-    // Перечисление типов используемых фигур
-    enum FigureTypes {
-        SquareType,
-        RombType,
-        TriangleType,
-        ElipseTtype,
-        Non
-    };
-
-signals:
-    void typeFigureChanged();               // Сигнал об изменении типа текущей фигуры
+    void setTypeFigure(Figure *NewFigureSpawner);     // Установка текущего типа
+    void RedoFigure();
+    void UndoFigure();
 
 private:
     int m_typeFigure;   // текущий тип фигуры
     Figure *tempFigure;
+    std::vector<Figure*> undo, redo;
+    Figure *CurFigureSpawner;
 
 private:
     // Для рисования используем события мыши

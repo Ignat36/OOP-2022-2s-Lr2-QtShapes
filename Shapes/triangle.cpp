@@ -12,6 +12,11 @@ Triangle::~Triangle()
 
 }
 
+Figure* Triangle::Copy(QPointF point)
+{
+    return new Triangle(point);
+}
+
 void Triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(QPen(Qt::black, 2));

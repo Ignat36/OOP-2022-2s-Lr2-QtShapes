@@ -1,12 +1,8 @@
 #include "paintscene.h"
-#include "romb.h"
-#include "triangle.h"
-#include "square.h"
-#include "elipse.h"
 
 PaintScene::PaintScene(QObject *parent) : QGraphicsScene(parent)
 {
-    tempFigure = nullptr;
+    tempFigure = CurFigureSpawner = nullptr;
 }
 
 PaintScene::~PaintScene()
@@ -14,19 +10,14 @@ PaintScene::~PaintScene()
 
 }
 
-int PaintScene::typeFigure() const
+void PaintScene::setTypeFigure(Figure *NewFigureSpawner)
 {
-    return m_typeFigure;
-}
-
-void PaintScene::setTypeFigure(const int type)
-{
-    m_typeFigure = type;
+    CurFigureSpawner = NewFigureSpawner;
 }
 
 void PaintScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(m_typeFigure != Non)
+    if(CurFigureSpawner != nullptr)
     {
         if(tempFigure != nullptr)
         {
@@ -46,7 +37,7 @@ void PaintScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void PaintScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(m_typeFigure != Non)
+    if(CurFigureSpawner != nullptr)
         tempFigure = nullptr;
     else
     {
@@ -56,37 +47,16 @@ void PaintScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    switch (m_typeFigure) {
-    case SquareType: {
-        Square *item = new Square(event->scenePos());
+    if(CurFigureSpawner != nullptr)
+    {
+        Figure *item = CurFigureSpawner->Copy(event->scenePos());
         item->setPos(event->pos());
         tempFigure = item;
-        break;
-    }
-    case RombType: {
-        Romb *item = new Romb(event->scenePos());
-        item->setPos(event->pos());
-        tempFigure = item;
-        break;
-    }
-    case TriangleType: {
-        Triangle *item = new Triangle(event->scenePos());
-        item->setPos(event->pos());
-        tempFigure = item;
-        break;
-    }
-    case ElipseTtype: {
-        Elipse *item = new Elipse(event->scenePos());
-        item->setPos(event->pos());
-        tempFigure = item;
-        break;
-    }
-    default:{
-        QGraphicsScene::mousePressEvent(event);
-        break;
-    }
-    }
-    if(m_typeFigure != Non)
         this->addItem(tempFigure);
+    }
+    else
+    {
+        QGraphicsScene::mousePressEvent(event);
+    }
 }
 

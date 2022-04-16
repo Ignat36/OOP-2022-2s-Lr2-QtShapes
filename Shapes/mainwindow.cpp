@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     scene = new PaintScene();
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -43,31 +43,31 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::on_pushButton_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(PaintScene::RombType);
+    scene->setTypeFigure(new Romb(QPointF()));
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(PaintScene::SquareType);
+    scene->setTypeFigure(new Square(QPointF()));
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(PaintScene::TriangleType);
+    scene->setTypeFigure(new Triangle(QPointF()));
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(PaintScene::ElipseTtype);
+    scene->setTypeFigure(new Elipse(QPointF()));
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
     scene = new PaintScene();
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -84,7 +84,7 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
     FlagDelete = true;
     ui->graphicsView->setCursor(Qt::ForbiddenCursor);
@@ -93,7 +93,7 @@ void MainWindow::on_pushButton_6_clicked()
 void MainWindow::on_pushButton_7_clicked()
 {
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
     FlagMove = true;
 }
@@ -101,7 +101,7 @@ void MainWindow::on_pushButton_7_clicked()
 void MainWindow::on_pushButton_8_clicked()
 {
     ui->graphicsView->setCursor(Qt::SizeAllCursor);
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
     FlagChange = true;
 }
@@ -109,7 +109,7 @@ void MainWindow::on_pushButton_8_clicked()
 void MainWindow::on_pushButton_9_clicked()
 {
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
-    scene->setTypeFigure(PaintScene::Non);
+    scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
     FlagRotate = true;
 }

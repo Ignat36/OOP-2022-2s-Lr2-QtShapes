@@ -13,8 +13,10 @@ public:
     explicit Square(QPointF point, QObject *parent = 0);
     ~Square();
 
+    Figure* Copy(QPointF point) override;
+
 private:
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 };
 
 #endif // SQUARE_H
