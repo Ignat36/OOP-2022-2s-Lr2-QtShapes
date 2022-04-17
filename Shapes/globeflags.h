@@ -4,6 +4,7 @@ bool FlagMove;
 bool FlagDelete;
 bool FlagChange;
 bool FlagRotate;
+bool FlagBrush;
 
 QPen pen;
 QColor CurColor;

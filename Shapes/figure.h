@@ -39,6 +39,7 @@ public:
     QColor lineColor;
     QColor brushColor;
     int lineWidth;
+    bool brushFlag;
 
 private:
     QPointF m_startPoint;
@@ -61,6 +62,6 @@ private:
 
 public slots:
     void updateRomb();
-};                                                                                                                                                                                                                                                                                                                                                                                                                                                                  extern bool FlagRotate; extern bool FlagChange; extern bool FlagMove; extern bool FlagDelete; extern void setAllFlagsFalse(); extern void setDefaultPen(); extern QPen pen; extern QColor CurColor; extern QColor CurBrushColor; extern int CurPenWidth;
+};                                                                                                                                                                                                                                                                                                                                                                                                                                                                  extern bool FlagRotate; extern bool FlagChange; extern bool FlagMove; extern bool FlagDelete; extern bool FlagBrush; extern void setAllFlagsFalse(); extern void setDefaultPen(); extern QPen pen; extern QColor CurColor; extern QColor CurBrushColor; extern int CurPenWidth;
 
 #endif // FIGURE_H

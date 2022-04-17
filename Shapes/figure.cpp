@@ -10,6 +10,7 @@ Figure::Figure(QPointF point, QObject *parent) :
     brushColor = CurBrushColor;
     lineColor = CurColor;
     lineWidth = CurPenWidth;
+    brushFlag = FlagBrush;
 
     timer = new QTimer();
     PressedButton = -1;

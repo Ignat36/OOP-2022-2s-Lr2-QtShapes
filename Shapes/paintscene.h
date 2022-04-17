@@ -14,6 +14,7 @@
 #include "triangle.h"
 #include "square.h"
 #include "elipse.h"
+#include "segment.h"
 
 class PaintScene : public QGraphicsScene
 {

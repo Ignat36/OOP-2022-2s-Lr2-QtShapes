@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     paintscene.cpp \
     romb.cpp \
+    segment.cpp \
     square.cpp \
     triangle.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     mainwindow.h \
     paintscene.h \
     romb.h \
+    segment.h \
     square.h \
     triangle.h
 

@@ -54,6 +54,8 @@ private slots:
     void on_greenSlider_2_valueChanged(int value);
     void on_blueSlider_2_valueChanged(int value);
     void on_spinBox_valueChanged(int arg1);
+    void on_checkBox_clicked(bool checked);
+    void on_pushButton_12_clicked();
 };
 
 #endif // MAINWINDOW_H

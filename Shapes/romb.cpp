@@ -20,7 +20,7 @@ Figure* Romb::Copy(QPointF point)
 void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     painter->setPen(QPen(lineColor, lineWidth));
-    painter->setBrush(QBrush(brushColor));
+    if(brushFlag) painter->setBrush(QBrush(brushColor));
 
     QPolygonF polygon;
 

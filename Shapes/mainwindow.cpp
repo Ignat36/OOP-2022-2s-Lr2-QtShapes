@@ -200,3 +200,16 @@ void MainWindow::on_spinBox_valueChanged(int arg1)
     pen.setWidth(arg1);
 }
 
+
+void MainWindow::on_checkBox_clicked(bool checked)
+{
+    FlagBrush = checked;
+}
+
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    ui->graphicsView->setCursor(Qt::ArrowCursor);
+    scene->setTypeFigure(new Segment(QPointF()));
+}
+
