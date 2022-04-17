@@ -19,13 +19,13 @@ Figure* Square::Copy(QPointF point)
 
 void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setPen(QPen(Qt::black, 2));
+    painter->setPen(QPen(lineColor, lineWidth));
+    painter->setBrush(QBrush(brushColor));
 
     QRectF rect(endPoint().x() > startPoint().x() ? startPoint().x() : endPoint().x(),
                 endPoint().y() > startPoint().y() ? startPoint().y() : endPoint().y(),
                 qAbs(endPoint().x() - startPoint().x()),
                 qAbs(endPoint().y() - startPoint().y()));
-
     painter->drawRect(rect);
 
     Q_UNUSED(option)

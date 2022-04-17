@@ -17,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     ui->graphicsView->setCursor(Qt::ArrowCursor);
     setAllFlagsFalse();
+    setDefaultPen();
+    CurBrushColor = QColor(255, 255, 255);
+    r = g = b = "0";
+    r1 = g1 = b1 = "255";
 
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);
@@ -123,5 +127,76 @@ void MainWindow::on_pushButton_10_clicked()
 void MainWindow::on_pushButton_11_clicked()
 {
     scene->RedoFigure();
+}
+
+
+void MainWindow::on_redSlider_valueChanged(int value)
+{
+    r = QString::number(value);
+
+    ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
+
+    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    pen.setColor(CurColor);
+}
+
+
+void MainWindow::on_greenSlider_valueChanged(int value)
+{
+    g = QString::number(value);
+
+    ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
+
+    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    pen.setColor(CurColor);
+}
+
+
+void MainWindow::on_blueSlider_valueChanged(int value)
+{
+    b = QString::number(value);
+
+    ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
+
+    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    pen.setColor(CurColor);
+
+}
+
+
+void MainWindow::on_redSlider_2_valueChanged(int value)
+{
+    r1 = QString::number(value);
+
+    ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
+
+    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+}
+
+
+void MainWindow::on_greenSlider_2_valueChanged(int value)
+{
+    g1 = QString::number(value);
+
+    ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
+
+    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+}
+
+
+void MainWindow::on_blueSlider_2_valueChanged(int value)
+{
+    b1 = QString::number(value);
+
+    ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
+
+    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+}
+
+
+void MainWindow::on_spinBox_valueChanged(int arg1)
+{
+    CurPenWidth = arg1;
+    pen.setWidth(arg1);
 }
 

@@ -7,6 +7,10 @@ Figure::Figure(QPointF point, QObject *parent) :
     this->setEndPoint(mapFromScene(point));
     RotationAngle = 0;
 
+    brushColor = CurBrushColor;
+    lineColor = CurColor;
+    lineWidth = CurPenWidth;
+
     timer = new QTimer();
     PressedButton = -1;
     connect(timer, &QTimer::timeout, this, &Figure::slotTimer);

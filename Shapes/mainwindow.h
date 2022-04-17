@@ -24,6 +24,8 @@ private:
     Ui::MainWindow *ui;
     PaintScene *scene;
     QTimer *timer;
+    QString r, g, b;
+    QString r1, g1, b1;
 
 private:
     /* Переопределяем событие изменения размера окна
@@ -45,6 +47,13 @@ private slots:
     void on_pushButton_9_clicked();
     void on_pushButton_10_clicked();
     void on_pushButton_11_clicked();
+    void on_redSlider_valueChanged(int value);
+    void on_greenSlider_valueChanged(int value);
+    void on_blueSlider_valueChanged(int value);
+    void on_redSlider_2_valueChanged(int value);
+    void on_greenSlider_2_valueChanged(int value);
+    void on_blueSlider_2_valueChanged(int value);
+    void on_spinBox_valueChanged(int arg1);
 };
 
 #endif // MAINWINDOW_H

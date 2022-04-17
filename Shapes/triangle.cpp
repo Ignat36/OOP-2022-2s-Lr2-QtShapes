@@ -5,6 +5,7 @@ Triangle::Triangle(QPointF point, QObject *parent) :
     Figure(point,parent)
 {
     Q_UNUSED(point)
+
 }
 
 Triangle::~Triangle()
@@ -19,7 +20,8 @@ Figure* Triangle::Copy(QPointF point)
 
 void Triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setPen(QPen(Qt::black, 2));
+    painter->setPen(QPen(lineColor, lineWidth));
+    painter->setBrush(QBrush(brushColor));
 
     QPolygonF polygon;
 
