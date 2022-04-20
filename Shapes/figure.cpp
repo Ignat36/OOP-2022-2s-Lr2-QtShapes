@@ -252,7 +252,6 @@ void GlobParams::setAllFlagsFalse()
     FlagMove = false;
     FlagRotate = false;
     FlagChange = false;
-    FlagBrush = false;
     FlagCopy = false;
 }
 

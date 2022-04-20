@@ -111,6 +111,7 @@ void MainWindow::on_pushButton_5_clicked()
 {
     scene = new PaintScene();
     scene->setTypeFigure(nullptr);
+    scene->globs = globs;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
