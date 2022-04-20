@@ -1,8 +1,8 @@
 #include "elipse.h"
 #include <QPainter>
 
-Elipse::Elipse(QPointF point, QObject *parent) :
-    Figure(point,parent)
+Elipse::Elipse(GlobParams *gl, QPointF point, QObject *parent) :
+    Figure(gl,point,parent)
 {
     Q_UNUSED(point)
 }
@@ -14,7 +14,7 @@ Elipse::~Elipse()
 
 Figure* Elipse::Copy(QPointF point)
 {
-    return new Elipse(point);
+    return new Elipse(globs, point);
 }
 
 // Реализуем метод отрисовки

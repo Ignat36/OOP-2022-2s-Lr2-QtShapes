@@ -1,8 +1,8 @@
 #include "square.h"
 #include <QPainter>
 
-Square::Square(QPointF point, QObject *parent) :
-    Figure(point,parent)
+Square::Square(GlobParams *gl, QPointF point, QObject *parent) :
+    Figure(gl,point,parent)
 {
     Q_UNUSED(point)
 }
@@ -14,7 +14,7 @@ Square::~Square()
 
 Figure* Square::Copy(QPointF point)
 {
-    return new Square(point);
+    return new Square(globs, point);
 }
 
 void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -28,7 +28,7 @@ void PaintScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     else
     {
         QGraphicsScene::mouseMoveEvent(event);
-        if(FlagChange || FlagRotate || FlagMove)
+        if(globs->FlagChange || globs->FlagRotate || globs->FlagMove)
         {
             this->update(QRectF(0,0,this->width(), this->height()));
         }
@@ -62,13 +62,13 @@ void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     {
         QGraphicsScene::mousePressEvent(event);
 
-        if(FlagCopy)
+        if(globs->FlagCopy)
         {
-            FlagCopy = false;
-            FlagMove = true;
+            globs->FlagCopy = false;
+            globs->FlagMove = true;
 
-            tempFigure = tmpFigure;
-            tmpFigure = nullptr;
+            tempFigure = globs->tmpFigure;
+            globs->tmpFigure = nullptr;
             this->addItem(tempFigure);
         }
     }

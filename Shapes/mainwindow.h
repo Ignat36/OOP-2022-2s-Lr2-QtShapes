@@ -30,6 +30,8 @@ private:
     QString r, g, b;
     QString r1, g1, b1;
     std::map<QString, Figure*> shapes;
+    GlobParams *globs;
+
 
 private:
     /* Переопределяем событие изменения размера окна

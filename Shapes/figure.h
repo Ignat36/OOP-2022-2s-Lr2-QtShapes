@@ -9,6 +9,8 @@
 #include <QTimer>
 #include <QGraphicsSceneMouseEvent>
 
+class GlobParams;
+
 class Figure : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -21,7 +23,7 @@ class Figure : public QObject, public QGraphicsItem
                READ endPoint WRITE setEndPoint
                NOTIFY pointChanged)
 public:
-    explicit Figure(QPointF point, QObject *parent = 0);
+    explicit Figure(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Figure();
 
     QPointF startPoint() const;
@@ -40,6 +42,7 @@ public:
     QColor brushColor;
     int lineWidth;
     bool brushFlag;
+    GlobParams *globs;
 
 public:
     QPointF m_startPoint;
@@ -62,6 +65,29 @@ public:
 
 public slots:
     void updateRomb();
-};                                                                                                                                                                                                                                                                                                                                                                                                                                                                  extern Figure *tmpFigure; extern bool FlagCopy; extern bool FlagRotate; extern bool FlagChange; extern bool FlagMove; extern bool FlagDelete; extern bool FlagBrush; extern void setAllFlagsFalse(); extern void setDefaultPen(); extern QPen pen; extern QColor CurColor; extern QColor CurBrushColor; extern int CurPenWidth;
+};
+
+class GlobParams
+{
+
+public:
+    GlobParams();
+    bool FlagMove;
+    bool FlagDelete;
+    bool FlagChange;
+    bool FlagRotate;
+    bool FlagBrush;
+    bool FlagCopy;
+
+    QPen pen;
+    QColor CurColor;
+    QColor CurBrushColor;
+    int CurPenWidth;
+    Figure* tmpFigure;
+
+    void setAllFlagsFalse();
+    void setDefaultPen();
+
+};
 
 #endif // FIGURE_H

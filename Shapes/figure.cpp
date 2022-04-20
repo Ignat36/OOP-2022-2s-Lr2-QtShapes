@@ -1,16 +1,18 @@
 #include "figure.h"
 
-Figure::Figure(QPointF point, QObject *parent) :
+Figure::Figure(GlobParams *gl, QPointF point, QObject *parent) :
     QObject(parent), QGraphicsItem()
 {
+    globs = gl;
+
     this->setStartPoint(mapFromScene(point));
     this->setEndPoint(mapFromScene(point));
     RotationAngle = 0;
 
-    brushColor = CurBrushColor;
-    lineColor = CurColor;
-    lineWidth = CurPenWidth;
-    brushFlag = FlagBrush;
+    brushColor = globs->CurBrushColor;
+    lineColor = globs->CurColor;
+    lineWidth = globs->CurPenWidth;
+    brushFlag = globs->FlagBrush;
 
     timer = new QTimer();
     PressedButton = -1;
@@ -76,7 +78,7 @@ QPointF Figure::endPoint() const
 
 void Figure::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(FlagMove)
+    if(globs->FlagMove)
     {
         bool tmp = false;
         if(RotationAngle)
@@ -125,11 +127,11 @@ void Figure::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             this->setRotation(RotationAngle);
         }
     }
-    if(FlagChange)
+    if(globs->FlagChange)
     {
         this->setEndPoint(event->scenePos());
     }
-    if(FlagRotate)
+    if(globs->FlagRotate)
     {
 
     }
@@ -167,19 +169,19 @@ void Figure::setRotationPoint()
 
 void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(FlagMove)
+    if(globs->FlagMove)
     {
 
     }
-    if(FlagDelete)
+    if(globs->FlagDelete)
     {
         this->deleteLater();
     }
-    if(FlagChange)
+    if(globs->FlagChange)
     {
 
     }
-    if(FlagRotate)
+    if(globs->FlagRotate)
     {
         if(event->buttons() == Qt::RightButton)
         {
@@ -195,34 +197,68 @@ void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
         timer->start(12);
 
     }
-    if(FlagCopy)
+    if(globs->FlagCopy)
     {
-        tmpFigure = this->Copy(QPointF());
-        tmpFigure->m_startPoint = this->m_startPoint;
-        tmpFigure->m_endPoint = this->m_endPoint;
-        tmpFigure->RotationAngle = this->RotationAngle;
+        globs->tmpFigure = this->Copy(QPointF());
+        globs->tmpFigure->m_startPoint = this->m_startPoint;
+        globs->tmpFigure->m_endPoint = this->m_endPoint;
+        globs->tmpFigure->RotationAngle = this->RotationAngle;
 
-        tmpFigure->lineColor = this->lineColor;
-        tmpFigure->brushColor = this->brushColor;
-        tmpFigure->lineWidth = this->lineWidth;
-        tmpFigure->brushFlag = this->brushFlag;
+        globs->tmpFigure->lineColor = this->lineColor;
+        globs->tmpFigure->brushColor = this->brushColor;
+        globs->tmpFigure->lineWidth = this->lineWidth;
+        globs->tmpFigure->brushFlag = this->brushFlag;
     }
     Q_UNUSED(event);
 }
 
 void Figure::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-    if(FlagMove)
+    if(globs->FlagMove)
     {
 
     }
-    if(FlagChange)
+    if(globs->FlagChange)
     {
 
     }
-    if(FlagRotate)
+    if(globs->FlagRotate)
     {
         timer->stop();
     }
     Q_UNUSED(event);
+}
+
+GlobParams::GlobParams()
+{
+    FlagDelete = false;
+    FlagMove = false;
+    FlagRotate = false;
+    FlagChange = false;
+    FlagBrush = false;
+    FlagCopy = false;
+
+    pen = QPen(QColor(0, 0, 0), 2);
+    CurColor = QColor(0, 0, 0);
+    CurPenWidth = 2;
+
+    CurBrushColor = QColor(255, 255, 255);
+    tmpFigure = nullptr;
+}
+
+void GlobParams::setAllFlagsFalse()
+{
+    FlagDelete = false;
+    FlagMove = false;
+    FlagRotate = false;
+    FlagChange = false;
+    FlagBrush = false;
+    FlagCopy = false;
+}
+
+void GlobParams::setDefaultPen()
+{
+    pen = QPen(QColor(0, 0, 0), 2);
+    CurColor = QColor(0, 0, 0);
+    CurPenWidth = 2;
 }

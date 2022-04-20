@@ -6,9 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    globs = new GlobParams();
     scene = new PaintScene();
     scene->setTypeFigure(nullptr);
+    scene->globs = globs;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -16,9 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    setAllFlagsFalse();
-    setDefaultPen();
-    CurBrushColor = QColor(255, 255, 255);
+
+
     r = g = b = "0";
     r1 = g1 = b1 = "255";
 
@@ -58,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
         if(func && funcName)
         {
             Figure* tmp = func();
+            tmp->globs = globs;
             char* name = funcName();
             shapes[QString(name)] = tmp;
             ui->comboBox->addItem(QString(name));
@@ -85,25 +86,25 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::on_pushButton_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(new Romb(QPointF()));
+    scene->setTypeFigure(new Romb(globs, QPointF()));
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(new Square(QPointF()));
+    scene->setTypeFigure(new Square(globs, QPointF()));
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(new Triangle(QPointF()));
+    scene->setTypeFigure(new Triangle(globs, QPointF()));
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(new Elipse(QPointF()));
+    scene->setTypeFigure(new Elipse(globs, QPointF()));
 }
 
 void MainWindow::on_pushButton_5_clicked()
@@ -117,7 +118,7 @@ void MainWindow::on_pushButton_5_clicked()
     ui->graphicsView->setCacheMode(QGraphicsView::CacheBackground);
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    setAllFlagsFalse();
+    globs->setAllFlagsFalse();
 
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);
@@ -128,8 +129,8 @@ void MainWindow::on_pushButton_6_clicked()
 {
     ui->comboBox->setCurrentIndex(0);
     scene->setTypeFigure(nullptr);
-    setAllFlagsFalse();
-    FlagDelete = true;
+    globs->setAllFlagsFalse();
+    globs->FlagDelete = true;
     ui->graphicsView->setCursor(Qt::ForbiddenCursor);
 }
 
@@ -138,8 +139,8 @@ void MainWindow::on_pushButton_7_clicked()
     ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
     scene->setTypeFigure(nullptr);
-    setAllFlagsFalse();
-    FlagMove = true;
+    globs->setAllFlagsFalse();
+    globs->FlagMove = true;
 }
 
 void MainWindow::on_pushButton_8_clicked()
@@ -147,8 +148,8 @@ void MainWindow::on_pushButton_8_clicked()
     ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::SizeAllCursor);
     scene->setTypeFigure(nullptr);
-    setAllFlagsFalse();
-    FlagChange = true;
+    globs->setAllFlagsFalse();
+    globs->FlagChange = true;
 }
 
 void MainWindow::on_pushButton_9_clicked()
@@ -156,8 +157,8 @@ void MainWindow::on_pushButton_9_clicked()
     ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
     scene->setTypeFigure(nullptr);
-    setAllFlagsFalse();
-    FlagRotate = true;
+    globs->setAllFlagsFalse();
+    globs->FlagRotate = true;
 }
 
 void MainWindow::on_pushButton_10_clicked()
@@ -178,8 +179,8 @@ void MainWindow::on_redSlider_valueChanged(int value)
 
     ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
 
-    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
-    pen.setColor(CurColor);
+    globs->CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    globs->pen.setColor(globs->CurColor);
 }
 
 
@@ -189,8 +190,8 @@ void MainWindow::on_greenSlider_valueChanged(int value)
 
     ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
 
-    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
-    pen.setColor(CurColor);
+    globs->CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    globs->pen.setColor(globs->CurColor);
 }
 
 
@@ -200,8 +201,8 @@ void MainWindow::on_blueSlider_valueChanged(int value)
 
     ui->UsedColor->setStyleSheet("border: 2px solid red; background-color: rgb("+r+", "+g+", "+b+");");
 
-    CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
-    pen.setColor(CurColor);
+    globs->CurColor = QColor(r.toInt(), g.toInt(), b.toInt());
+    globs->pen.setColor(globs->CurColor);
 
 }
 
@@ -212,7 +213,7 @@ void MainWindow::on_redSlider_2_valueChanged(int value)
 
     ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
 
-    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+    globs->CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
 }
 
 
@@ -222,7 +223,7 @@ void MainWindow::on_greenSlider_2_valueChanged(int value)
 
     ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
 
-    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+    globs->CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
 }
 
 
@@ -232,20 +233,20 @@ void MainWindow::on_blueSlider_2_valueChanged(int value)
 
     ui->UsedColor_2->setStyleSheet("border: 2px solid red; background-color: rgb("+r1+", "+g1+", "+b1+");");
 
-    CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
+    globs->CurBrushColor = QColor(r1.toInt(), g1.toInt(), b1.toInt());
 }
 
 
 void MainWindow::on_spinBox_valueChanged(int arg1)
 {
-    CurPenWidth = arg1;
-    pen.setWidth(arg1);
+    globs->CurPenWidth = arg1;
+    globs->pen.setWidth(arg1);
 }
 
 
 void MainWindow::on_checkBox_clicked(bool checked)
 {
-    FlagBrush = checked;
+    globs->FlagBrush = checked;
 }
 
 
@@ -254,8 +255,8 @@ void MainWindow::on_pushButton_13_clicked()
     ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::WhatsThisCursor);
     scene->setTypeFigure(nullptr);
-    setAllFlagsFalse();
-    FlagCopy = true;
+    globs->setAllFlagsFalse();
+    globs->FlagCopy = true;
 }
 
 void MainWindow::on_pushButton_12_clicked() {}
@@ -273,6 +274,6 @@ void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
 void MainWindow::on_comboBox_textActivated(const QString &arg1)
 {
     ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(shapes[arg1]->Copy(QPointF()));
+    scene->setTypeFigure(shapes[arg1]);
 }
 

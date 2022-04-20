@@ -13,7 +13,7 @@ class Romb : public Figure
     Q_OBJECT
 
 public:
-    explicit Romb(QPointF point, QObject *parent = 0);
+    explicit Romb(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Romb();
 
     Figure* Copy(QPointF point) override;

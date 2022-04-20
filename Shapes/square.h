@@ -10,7 +10,7 @@ class Square : public Figure
     Q_OBJECT
 
 public:
-    explicit Square(QPointF point, QObject *parent = 0);
+    explicit Square(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Square();
 
     Figure* Copy(QPointF point) override;

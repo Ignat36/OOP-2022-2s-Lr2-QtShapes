@@ -10,7 +10,7 @@ class Triangle : public Figure
     Q_OBJECT
 
 public:
-    explicit Triangle(QPointF point, QObject *parent = 0);
+    explicit Triangle(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Triangle();
 
     Figure* Copy(QPointF point) override;

@@ -11,7 +11,6 @@ CONFIG += c++11
 SOURCES += \
     elipse.cpp \
     figure.cpp \
-    globeflags.cpp \
     main.cpp \
     mainwindow.cpp \
     paintscene.cpp \
@@ -22,7 +21,6 @@ SOURCES += \
 HEADERS += \
     elipse.h \
     figure.h \
-    globeflags.h \
     mainwindow.h \
     paintscene.h \
     romb.h \

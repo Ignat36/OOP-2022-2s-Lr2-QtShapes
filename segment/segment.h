@@ -8,7 +8,7 @@ class SEGMENT_EXPORT Segment : public Figure
 {
     Q_OBJECT
 public:
-    explicit Segment(QPointF point, QObject *parent = 0);
+    explicit Segment(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Segment();
 
     Figure* Copy(QPointF point) override;

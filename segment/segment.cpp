@@ -2,8 +2,8 @@
 #include <QPainter>
 #include <QChar>
 
-Segment::Segment(QPointF point, QObject *parent) :
-    Figure(point,parent)
+Segment::Segment(GlobParams *gl, QPointF point, QObject *parent) :
+    Figure(gl,point,parent)
 {
     Q_UNUSED(point)
 }
@@ -15,7 +15,7 @@ Segment::~Segment()
 
 Figure* Segment::Copy(QPointF point)
 {
-    return new Segment(point);
+    return new Segment(globs, point);
 }
 
 void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -38,7 +38,7 @@ void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 
 Figure* getShape()
 {
-    Figure* tmp = new Segment(QPointF());
+    Figure* tmp = new Segment(new GlobParams(), QPointF());
     return tmp;
 }
 

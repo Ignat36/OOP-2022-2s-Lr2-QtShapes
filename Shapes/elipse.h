@@ -10,7 +10,7 @@ class Elipse : public Figure
     Q_OBJECT
 
 public:
-    explicit Elipse(QPointF point, QObject *parent = 0);
+    explicit Elipse(GlobParams *gl, QPointF point, QObject *parent = 0);
     ~Elipse();
 
     Figure* Copy(QPointF point) override;

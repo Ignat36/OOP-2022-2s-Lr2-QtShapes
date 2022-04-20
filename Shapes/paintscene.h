@@ -26,12 +26,14 @@ public:
     void setTypeFigure(Figure *NewFigureSpawner);     // Установка текущего типа
     void RedoFigure();
     void UndoFigure();
+    GlobParams *globs;
 
 private:
     int m_typeFigure;   // текущий тип фигуры
     Figure *tempFigure;
     std::vector<Figure*> undo, redo;
     Figure *CurFigureSpawner;
+
 
 private:
     // Для рисования используем события мыши

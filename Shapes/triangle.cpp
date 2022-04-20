@@ -1,8 +1,8 @@
 #include "triangle.h"
 #include <QPainter>
 
-Triangle::Triangle(QPointF point, QObject *parent) :
-    Figure(point,parent)
+Triangle::Triangle(GlobParams *gl, QPointF point, QObject *parent) :
+    Figure(gl,point,parent)
 {
     Q_UNUSED(point)
 
@@ -15,7 +15,7 @@ Triangle::~Triangle()
 
 Figure* Triangle::Copy(QPointF point)
 {
-    return new Triangle(point);
+    return new Triangle(globs, point);
 }
 
 void Triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

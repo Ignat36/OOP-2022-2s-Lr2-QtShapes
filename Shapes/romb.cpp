@@ -1,8 +1,8 @@
 #include "romb.h"
 #include <QPainter>
 
-Romb::Romb(QPointF point, QObject *parent) :
-    Figure(point,parent)
+Romb::Romb(GlobParams *gl, QPointF point, QObject *parent) :
+    Figure(gl,point,parent)
 {
     Q_UNUSED(point)
 }
@@ -14,7 +14,7 @@ Romb::~Romb()
 
 Figure* Romb::Copy(QPointF point)
 {
-    return new Romb(point);
+    return new Romb(globs, point);
 }
 
 void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

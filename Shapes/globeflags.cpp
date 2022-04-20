@@ -7,6 +7,7 @@ void setAllFlagsFalse()
     FlagRotate = false;
     FlagChange = false;
     FlagBrush = false;
+    FlagCopy = false;
 }
 
 void setDefaultPen()
