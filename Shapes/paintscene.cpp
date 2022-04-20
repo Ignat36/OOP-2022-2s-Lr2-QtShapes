@@ -61,6 +61,16 @@ void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     else
     {
         QGraphicsScene::mousePressEvent(event);
+
+        if(FlagCopy)
+        {
+            FlagCopy = false;
+            FlagMove = true;
+
+            tempFigure = tmpFigure;
+            tmpFigure = nullptr;
+            this->addItem(tempFigure);
+        }
     }
 }
 

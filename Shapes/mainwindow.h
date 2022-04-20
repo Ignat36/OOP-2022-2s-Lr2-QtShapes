@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QResizeEvent>
+#include <QLibrary>
+#include <QFile>
+#include <QDebug>
 
 #include "paintscene.h"
 
@@ -56,6 +59,7 @@ private slots:
     void on_spinBox_valueChanged(int arg1);
     void on_checkBox_clicked(bool checked);
     void on_pushButton_12_clicked();
+    void on_pushButton_13_clicked();
 };
 
 #endif // MAINWINDOW_H

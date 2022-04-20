@@ -25,6 +25,27 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);
     timer->start(100);
+
+    QFile libs("additionalFigures\\LibrariesPathes.txt");
+
+    if(!libs.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Can not open libs pathes file";
+        return;
+    }
+
+    QTextStream in(&libs);
+    while(!in.atEnd())
+    {
+        QString path = in.readLine();
+
+        QLibrary lib(path);
+
+        if (!lib.load())
+            qDebug() << lib.errorString();
+
+
+    }
 }
 
 MainWindow::~MainWindow()
@@ -207,9 +228,15 @@ void MainWindow::on_checkBox_clicked(bool checked)
 }
 
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_pushButton_13_clicked()
 {
-    ui->graphicsView->setCursor(Qt::ArrowCursor);
-    scene->setTypeFigure(new Segment(QPointF()));
+    ui->graphicsView->setCursor(Qt::WhatsThisCursor);
+    scene->setTypeFigure(nullptr);
+    setAllFlagsFalse();
+    FlagCopy = true;
 }
+
+void MainWindow::on_pushButton_12_clicked() {}
+
+
 

@@ -195,6 +195,18 @@ void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
         timer->start(12);
 
     }
+    if(FlagCopy)
+    {
+        tmpFigure = this->Copy(QPointF());
+        tmpFigure->m_startPoint = this->m_startPoint;
+        tmpFigure->m_endPoint = this->m_endPoint;
+        tmpFigure->RotationAngle = this->RotationAngle;
+
+        tmpFigure->lineColor = this->lineColor;
+        tmpFigure->brushColor = this->brushColor;
+        tmpFigure->lineWidth = this->lineWidth;
+        tmpFigure->brushFlag = this->brushFlag;
+    }
     Q_UNUSED(event);
 }
 

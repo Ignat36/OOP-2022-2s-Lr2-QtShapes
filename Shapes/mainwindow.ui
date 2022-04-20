@@ -70,13 +70,13 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>450</y>
+      <y>500</y>
       <width>111</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Отчистка</string>
+     <string>Очистка</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView">
@@ -149,7 +149,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>560</y>
+      <y>580</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -162,7 +162,7 @@
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>590</y>
+      <y>610</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -352,17 +352,28 @@ background-color: rgb(255, 255, 255);</string>
      <string>Заливка</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_12">
+   <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
       <x>870</x>
-      <y>160</y>
+      <y>190</y>
       <width>111</width>
-      <height>21</height>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_13">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>450</y>
+      <width>111</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Отрезок</string>
+     <string>Копировать
+выбранный</string>
     </property>
    </widget>
   </widget>

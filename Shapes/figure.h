@@ -41,7 +41,7 @@ public:
     int lineWidth;
     bool brushFlag;
 
-private:
+public:
     QPointF m_startPoint;
     QPointF m_endPoint;
     double RotationAngle;
@@ -62,6 +62,6 @@ private:
 
 public slots:
     void updateRomb();
-};                                                                                                                                                                                                                                                                                                                                                                                                                                                                  extern bool FlagRotate; extern bool FlagChange; extern bool FlagMove; extern bool FlagDelete; extern bool FlagBrush; extern void setAllFlagsFalse(); extern void setDefaultPen(); extern QPen pen; extern QColor CurColor; extern QColor CurBrushColor; extern int CurPenWidth;
+};                                                                                                                                                                                                                                                                                                                                                                                                                                                                  extern Figure *tmpFigure; extern bool FlagCopy; extern bool FlagRotate; extern bool FlagChange; extern bool FlagMove; extern bool FlagDelete; extern bool FlagBrush; extern void setAllFlagsFalse(); extern void setDefaultPen(); extern QPen pen; extern QColor CurColor; extern QColor CurBrushColor; extern int CurPenWidth;
 
 #endif // FIGURE_H
