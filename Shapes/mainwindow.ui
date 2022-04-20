@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>750</x>
-      <y>130</y>
+      <x>940</x>
+      <y>220</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>940</x>
       <y>160</y>
       <width>111</width>
       <height>21</height>
@@ -43,7 +43,7 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>940</x>
       <y>190</y>
       <width>111</width>
       <height>21</height>
@@ -56,7 +56,7 @@
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>870</x>
+      <x>940</x>
       <y>130</y>
       <width>111</width>
       <height>21</height>
@@ -355,8 +355,8 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>870</x>
-      <y>190</y>
+      <x>750</x>
+      <y>130</y>
       <width>111</width>
       <height>22</height>
      </rect>

@@ -29,6 +29,7 @@ private:
     QTimer *timer;
     QString r, g, b;
     QString r1, g1, b1;
+    std::map<QString, Figure*> shapes;
 
 private:
     /* Переопределяем событие изменения размера окна
@@ -60,6 +61,8 @@ private slots:
     void on_checkBox_clicked(bool checked);
     void on_pushButton_12_clicked();
     void on_pushButton_13_clicked();
+    void on_comboBox_currentTextChanged(const QString &arg1);
+    void on_comboBox_textActivated(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H

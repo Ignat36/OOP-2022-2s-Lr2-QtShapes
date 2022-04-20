@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);
     timer->start(100);
 
+    ui->comboBox->addItem("");
+    shapes[""] = nullptr;
+
     QFile libs("additionalFigures\\LibrariesPathes.txt");
 
     if(!libs.open(QIODevice::ReadOnly))
@@ -42,9 +45,23 @@ MainWindow::MainWindow(QWidget *parent) :
         QLibrary lib(path);
 
         if (!lib.load())
+        {
             qDebug() << lib.errorString();
+            continue;
+        }
+        typedef Figure* (*Prototype)();
+        Prototype  func = (Prototype) lib.resolve("getShape");
 
+        typedef char* (*PrototypeName)();
+        PrototypeName  funcName = (PrototypeName) lib.resolve("getName");
 
+        if(func && funcName)
+        {
+            Figure* tmp = func();
+            char* name = funcName();
+            shapes[QString(name)] = tmp;
+            ui->comboBox->addItem(QString(name));
+        }
     }
 }
 
@@ -109,6 +126,7 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
+    ui->comboBox->setCurrentIndex(0);
     scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
     FlagDelete = true;
@@ -117,6 +135,7 @@ void MainWindow::on_pushButton_6_clicked()
 
 void MainWindow::on_pushButton_7_clicked()
 {
+    ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
     scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
@@ -125,6 +144,7 @@ void MainWindow::on_pushButton_7_clicked()
 
 void MainWindow::on_pushButton_8_clicked()
 {
+    ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::SizeAllCursor);
     scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
@@ -133,6 +153,7 @@ void MainWindow::on_pushButton_8_clicked()
 
 void MainWindow::on_pushButton_9_clicked()
 {
+    ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::ClosedHandCursor);
     scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
@@ -230,6 +251,7 @@ void MainWindow::on_checkBox_clicked(bool checked)
 
 void MainWindow::on_pushButton_13_clicked()
 {
+    ui->comboBox->setCurrentIndex(0);
     ui->graphicsView->setCursor(Qt::WhatsThisCursor);
     scene->setTypeFigure(nullptr);
     setAllFlagsFalse();
@@ -239,4 +261,18 @@ void MainWindow::on_pushButton_13_clicked()
 void MainWindow::on_pushButton_12_clicked() {}
 
 
+
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
+{
+    ui->graphicsView->setCursor(Qt::ArrowCursor);
+    scene->setTypeFigure(shapes[arg1]);
+}
+
+
+void MainWindow::on_comboBox_textActivated(const QString &arg1)
+{
+    ui->graphicsView->setCursor(Qt::ArrowCursor);
+    scene->setTypeFigure(shapes[arg1]->Copy(QPointF()));
+}
 

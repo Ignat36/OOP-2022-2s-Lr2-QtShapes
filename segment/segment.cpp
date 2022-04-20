@@ -1,5 +1,6 @@
 #include "segment.h"
 #include <QPainter>
+#include <QChar>
 
 Segment::Segment(QPointF point, QObject *parent) :
     Figure(point,parent)
@@ -35,9 +36,16 @@ void Segment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
     Q_UNUSED(widget)
 }
 
-
-std::pair<Figure*, QString> getShape()
+Figure* getShape()
 {
     Figure* tmp = new Segment(QPointF());
-    return {tmp, "Отрезок"};
+    return tmp;
+}
+
+char* getName()
+{
+    QString str1 = "Segment";
+    QByteArray ba = str1.toLocal8Bit();
+    char *name = ba.data();
+    return name;
 }

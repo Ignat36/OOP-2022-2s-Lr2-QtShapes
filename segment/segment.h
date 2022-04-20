@@ -18,6 +18,7 @@ private:
 
 };
 
-std::pair<Figure*, QString> getShape();
+extern "C" SEGMENT_EXPORT Figure* getShape();
+extern "C" SEGMENT_EXPORT char* getName();
 
 #endif // SEGMENT_H
