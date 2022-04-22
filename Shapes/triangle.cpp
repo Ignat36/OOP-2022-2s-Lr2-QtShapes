@@ -37,3 +37,8 @@ void Triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+
+QString Triangle::getName()
+{
+    return "Треугольник";
+}

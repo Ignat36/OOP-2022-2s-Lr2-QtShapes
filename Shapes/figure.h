@@ -33,6 +33,7 @@ public:
     void setEndPoint(const QPointF point);
 
     virtual Figure* Copy(QPointF point) = 0;
+    virtual QString getName() = 0;
 
 signals:
     void pointChanged();
@@ -43,6 +44,7 @@ public:
     int lineWidth;
     bool brushFlag;
     GlobParams *globs;
+    int id;
 
 public:
     QPointF m_startPoint;
@@ -84,6 +86,8 @@ public:
     QColor CurBrushColor;
     int CurPenWidth;
     Figure* tmpFigure;
+
+    int ID;
 
     void setAllFlagsFalse();
     void setDefaultPen();

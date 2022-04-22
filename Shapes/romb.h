@@ -17,6 +17,7 @@ public:
     ~Romb();
 
     Figure* Copy(QPointF point) override;
+    QString getName() override;
 
 private:
     // Для Ромба реализуем только саму отрисовку

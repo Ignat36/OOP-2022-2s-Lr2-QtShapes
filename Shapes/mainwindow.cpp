@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new PaintScene();
     scene->setTypeFigure(nullptr);
     scene->globs = globs;
+    scene->FiguresView = ui->textBrowser;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -52,16 +53,12 @@ MainWindow::MainWindow(QWidget *parent) :
         typedef Figure* (*Prototype)();
         Prototype  func = (Prototype) lib.resolve("getShape");
 
-        typedef char* (*PrototypeName)();
-        PrototypeName  funcName = (PrototypeName) lib.resolve("getName");
-
-        if(func && funcName)
+        if(func)
         {
             Figure* tmp = func();
             tmp->globs = globs;
-            char* name = funcName();
-            shapes[QString(name)] = tmp;
-            ui->comboBox->addItem(QString(name));
+            shapes[tmp->getName()] = tmp;
+            ui->comboBox->addItem(tmp->getName());
         }
     }
 }
@@ -112,6 +109,7 @@ void MainWindow::on_pushButton_5_clicked()
     scene = new PaintScene();
     scene->setTypeFigure(nullptr);
     scene->globs = globs;
+    scene->FiguresView = ui->textBrowser;
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -260,7 +258,10 @@ void MainWindow::on_pushButton_13_clicked()
     globs->FlagCopy = true;
 }
 
-void MainWindow::on_pushButton_12_clicked() {}
+void MainWindow::on_pushButton_12_clicked()
+{
+    scene->updateFiguresList();
+}
 
 
 

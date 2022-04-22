@@ -5,6 +5,8 @@
 #include <QGraphicsView>
 #include <QGraphicsSceneMouseEvent>
 #include <QMouseEvent>
+#include <QListView>
+#include <QTextBrowser>
 #include <QVector>
 #include <QCursor>
 #include <qmath.h>
@@ -26,7 +28,9 @@ public:
     void setTypeFigure(Figure *NewFigureSpawner);     // Установка текущего типа
     void RedoFigure();
     void UndoFigure();
+    void updateFiguresList();
     GlobParams *globs;
+    QTextBrowser *FiguresView;
 
 private:
     int m_typeFigure;   // текущий тип фигуры

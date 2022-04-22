@@ -38,3 +38,8 @@ void Romb::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+
+QString Romb::getName()
+{
+    return "Ромб";
+}

@@ -33,3 +33,8 @@ void Elipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }
+
+QString Elipse::getName()
+{
+    return "Элипс";
+}

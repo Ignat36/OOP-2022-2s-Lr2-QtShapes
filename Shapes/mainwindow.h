@@ -32,7 +32,6 @@ private:
     std::map<QString, Figure*> shapes;
     GlobParams *globs;
 
-
 private:
     /* Переопределяем событие изменения размера окна
      * для пересчёта размеров графической сцены

@@ -175,7 +175,8 @@ void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
     if(globs->FlagDelete)
     {
-        this->deleteLater();
+        globs->tmpFigure = this;
+        // this->deleteLater();
     }
     if(globs->FlagChange)
     {
@@ -241,6 +242,8 @@ GlobParams::GlobParams()
     pen = QPen(QColor(0, 0, 0), 2);
     CurColor = QColor(0, 0, 0);
     CurPenWidth = 2;
+
+    ID = 0;
 
     CurBrushColor = QColor(255, 255, 255);
     tmpFigure = nullptr;

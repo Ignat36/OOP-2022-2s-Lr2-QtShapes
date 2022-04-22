@@ -56,6 +56,7 @@ void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
         Figure *item = CurFigureSpawner->Copy(event->scenePos());
         item->setPos(event->pos());
         tempFigure = item;
+        tempFigure->id = globs->ID; globs->ID++;
         this->addItem(tempFigure);
     }
     else
@@ -69,7 +70,16 @@ void PaintScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
             tempFigure = globs->tmpFigure;
             globs->tmpFigure = nullptr;
+            tempFigure->id = globs->ID; globs->ID++;
             this->addItem(tempFigure);
+            undo.push_back(tempFigure);
+        }
+
+        if(globs->FlagDelete && globs->tmpFigure)
+        {
+            this->removeItem(globs->tmpFigure);
+            undo.push_back(globs->tmpFigure);
+            globs->tmpFigure = nullptr;
         }
     }
 }
@@ -79,7 +89,10 @@ void PaintScene::RedoFigure()
     if(!redo.empty())
     {
         Figure* tmp = redo.back(); redo.pop_back();
-        this->addItem(tmp);
+        if(this->items().contains(tmp))
+            this->removeItem(tmp);
+        else
+            this->addItem(tmp);
         undo.push_back(tmp);
     }
 }
@@ -89,8 +102,24 @@ void PaintScene::UndoFigure()
     if(!undo.empty())
     {
         Figure* tmp = undo.back(); undo.pop_back();
-        this->removeItem(tmp);
+        if(this->items().contains(tmp))
+            this->removeItem(tmp);
+        else
+            this->addItem(tmp);
         redo.push_back(tmp);
     }
 }
 
+void PaintScene::updateFiguresList()
+{
+    QString text = "";
+    for(Figure* i : undo)
+    {
+        if(!this->items().contains(i))
+            continue;
+        text += i->getName() + ". Creation id: " + QString::number(i->id) + ". Shape location: " + QString::number(i->startPoint().x()) + " " + QString::number(i->startPoint().y());
+        text += "\n";
+    }
+    FiguresView->clear();
+    FiguresView->setText(text);
+}

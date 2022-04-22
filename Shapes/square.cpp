@@ -32,3 +32,7 @@ void Square::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     Q_UNUSED(widget)
 }
 
+QString Square::getName()
+{
+    return "Прямоугольник";
+}

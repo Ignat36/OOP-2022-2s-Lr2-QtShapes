@@ -12,6 +12,7 @@ public:
     ~Segment();
 
     Figure* Copy(QPointF point) override;
+    QString getName() override;
 
 private:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -19,6 +20,5 @@ private:
 };
 
 extern "C" SEGMENT_EXPORT Figure* getShape();
-extern "C" SEGMENT_EXPORT char* getName();
 
 #endif // SEGMENT_H

@@ -14,6 +14,7 @@ public:
     ~Square();
 
     Figure* Copy(QPointF point) override;
+    QString getName() override;
 
 private:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
