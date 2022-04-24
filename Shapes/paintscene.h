@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QListView>
 #include <QTextBrowser>
+#include <QFileDialog>
 #include <QVector>
 #include <QCursor>
 #include <qmath.h>
@@ -29,10 +30,11 @@ public:
     void RedoFigure();
     void UndoFigure();
     void updateFiguresList();
-    void saveToFile(QString fileName);
-    void loadFromFile(QString fileName);
+    void saveToFile();
     GlobParams *globs;
     QTextBrowser *FiguresView;
+
+    void addFigsList(std::vector<Figure*> list);
 
 private:
     int m_typeFigure;   // текущий тип фигуры

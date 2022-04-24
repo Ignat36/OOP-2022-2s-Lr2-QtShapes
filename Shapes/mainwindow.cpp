@@ -284,3 +284,44 @@ void MainWindow::on_comboBox_textActivated(const QString &arg1)
     scene->setTypeFigure(shapes[arg1]);
 }
 
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    scene->saveToFile();
+}
+
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName();
+
+    if(fileName.isNull())
+        return;
+
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+
+    std::vector<Figure*> nSceneFigures;
+
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        QList<QString> figs = line.split(" ");
+        Figure *i = shapes[figs[0]]->Copy(QPointF());
+        i->setStartPoint(QPointF(figs[1].toInt(), figs[2].toInt()));
+        i->setEndPoint(QPointF(figs[3].toInt(), figs[4].toInt()));
+        i->RotationAngle = figs[5].toInt(); i->setRotationPoint(); i->setRotation(i->RotationAngle);
+        i->lineWidth = figs[6].toInt();
+        i->brushFlag = figs[7].toInt() == 1;
+        i->lineColor = QColor(figs[8].toInt(), figs[9].toInt(), figs[10].toInt());
+        i->brushColor = QColor(figs[11].toInt(), figs[12].toInt(), figs[13].toInt());
+        i->id = figs[14].toInt();
+        nSceneFigures.push_back(i);
+    }
+
+    on_pushButton_5_clicked();
+    scene->addFigsList(nSceneFigures);
+}
+

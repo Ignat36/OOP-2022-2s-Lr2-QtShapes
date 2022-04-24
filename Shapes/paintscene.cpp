@@ -126,12 +126,47 @@ void PaintScene::updateFiguresList()
     FiguresView->setText(text);
 }
 
-void PaintScene::loadFromFile(QString fileName)
+void PaintScene::saveToFile()
 {
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName();
 
+    if(fileName.isNull())
+        return;
+
+    QFile file(fileName);
+    file.open(QIODevice::ReadWrite);
+    file.resize(0);
+
+    QTextStream out(&file);
+    for(Figure *i: undo)
+    {
+        out << i->getName() + " " +
+               QString::number(i->startPoint().x()) + " " +
+               QString::number(i->startPoint().y()) + " " +
+               QString::number(i->endPoint().x()) + " " +
+               QString::number(i->endPoint().y()) + " " +
+               QString::number(i->RotationAngle) + " " +
+               QString::number(i->lineWidth) + " " +
+               QString::number(i->brushFlag ? 1 : 0) + " " +
+
+               QString::number(i->lineColor.red()) + " " +
+               QString::number(i->lineColor.green()) + " " +
+               QString::number(i->lineColor.blue()) + " " +
+
+               QString::number(i->brushColor.red()) + " " +
+               QString::number(i->brushColor.green()) + " " +
+               QString::number(i->brushColor.blue()) + " " +
+
+               QString::number(i->id) + "\n";
+    }
 }
 
-void PaintScene::saveToFile(QString fileName)
+void PaintScene::addFigsList(std::vector<Figure *> list)
 {
-
+    for(auto i: list)
+    {
+        this->addItem(i);
+        undo.push_back(i);
+    }
 }

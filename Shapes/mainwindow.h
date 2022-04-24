@@ -7,6 +7,7 @@
 #include <QLibrary>
 #include <QFile>
 #include <QDebug>
+#include <QString>
 
 #include "paintscene.h"
 
@@ -64,6 +65,8 @@ private slots:
     void on_pushButton_13_clicked();
     void on_comboBox_currentTextChanged(const QString &arg1);
     void on_comboBox_textActivated(const QString &arg1);
+    void on_pushButton_14_clicked();
+    void on_pushButton_15_clicked();
 };
 
 #endif // MAINWINDOW_H
