@@ -87,38 +87,45 @@ void Figure::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
             this->setRotation(0);
             tmp = true;
         }
+
+        auto s = m_startPoint;
+        auto e = m_endPoint;
         if(m_startPoint.x() < m_endPoint.x())
         {
             if(m_startPoint.y() < m_endPoint.y())
             {
-                QPointF tempS = m_startPoint;
-                QPointF tempE = m_endPoint;
-                this->setStartPoint(event->scenePos() - (tempE - tempS) / 2);
-                this->setEndPoint(event->scenePos() + (tempE - tempS) / 2);
+                this->setStartPoint(QPointF(event->scenePos().x() - abs(s.x() - e.x()) / 2,
+                                            event->scenePos().y() - abs(s.y() - e.y()) / 2));
+
+                this->setEndPoint(QPointF(event->scenePos().x() + abs(s.x() - e.x()) / 2,
+                                          event->scenePos().y() + abs(s.y() - e.y()) / 2));
             }
             else
             {
-                QPointF tempS(m_startPoint.x(), m_endPoint.y());
-                QPointF tempE(m_endPoint.x(), m_startPoint.y());
-                this->setStartPoint(event->scenePos() + (tempE - tempS) / 2);
-                this->setEndPoint(event->scenePos() - (tempE - tempS) / 2);
+                this->setStartPoint(QPointF(event->scenePos().x() - abs(s.x() - e.x()) / 2,
+                                            event->scenePos().y() + abs(s.y() - e.y()) / 2));
+
+                this->setEndPoint(QPointF(event->scenePos().x() + abs(s.x() - e.x()) / 2,
+                                          event->scenePos().y() - abs(s.y() - e.y()) / 2));
             }
         }
         else
         {
             if(m_startPoint.y() < m_endPoint.y())
             {
-                QPointF tempS(m_endPoint.x(), m_startPoint.y());
-                QPointF tempE(m_startPoint.x(), m_endPoint.y());
-                this->setStartPoint(event->scenePos() + (tempE - tempS) / 2);
-                this->setEndPoint(event->scenePos() - (tempE - tempS) / 2);
+                this->setStartPoint(QPointF(event->scenePos().x() + abs(s.x() - e.x()) / 2,
+                                            event->scenePos().y() - abs(s.y() - e.y()) / 2));
+
+                this->setEndPoint(QPointF(event->scenePos().x() - abs(s.x() - e.x()) / 2,
+                                          event->scenePos().y() + abs(s.y() - e.y()) / 2));
             }
             else
             {
-                QPointF tempS = m_endPoint;
-                QPointF tempE = m_startPoint;
-                this->setStartPoint(event->scenePos() + (tempE - tempS) / 2);
-                this->setEndPoint(event->scenePos() - (tempE - tempS) / 2);
+                this->setStartPoint(QPointF(event->scenePos().x() + abs(s.x() - e.x()) / 2,
+                                            event->scenePos().y() + abs(s.y() - e.y()) / 2));
+
+                this->setEndPoint(QPointF(event->scenePos().x() - abs(s.x() - e.x()) / 2,
+                                          event->scenePos().y() - abs(s.y() - e.y()) / 2));
             }
         }
         if(tmp)
@@ -204,6 +211,8 @@ void Figure::mousePressEvent(QGraphicsSceneMouseEvent *event)
         globs->tmpFigure->m_startPoint = this->m_startPoint;
         globs->tmpFigure->m_endPoint = this->m_endPoint;
         globs->tmpFigure->RotationAngle = this->RotationAngle;
+        globs->tmpFigure->setRotationPoint();
+        globs->tmpFigure->setRotation(RotationAngle);
 
         globs->tmpFigure->lineColor = this->lineColor;
         globs->tmpFigure->brushColor = this->brushColor;

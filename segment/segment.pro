@@ -12,13 +12,11 @@ CONFIG += c++11
 SOURCES += \
     segment.cpp \
     D:\Windows\OOP-2022-2s-Lr2-QtShapes\Shapes\figure.cpp \
-    D:\Windows\OOP-2022-2s-Lr2-QtShapes\Shapes\globeflags.cpp \
 
 HEADERS += \
     segment_global.h \
     segment.h \
     D:\Windows\OOP-2022-2s-Lr2-QtShapes\Shapes\figure.h \
-    D:\Windows\OOP-2022-2s-Lr2-QtShapes\Shapes\globeflags.h \
 
 # Default rules for deployment.
 unix {

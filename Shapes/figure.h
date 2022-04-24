@@ -7,6 +7,7 @@
 #include <QCursor>
 #include <QPainter>
 #include <QTimer>
+#include <QPointF>
 #include <QGraphicsSceneMouseEvent>
 
 class GlobParams;

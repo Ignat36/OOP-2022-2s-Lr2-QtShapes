@@ -117,9 +117,21 @@ void PaintScene::updateFiguresList()
     {
         if(!this->items().contains(i))
             continue;
-        text += i->getName() + ". Creation id: " + QString::number(i->id) + ". Shape location: " + QString::number(i->startPoint().x()) + " " + QString::number(i->startPoint().y());
+        text += i->getName() + ". Creation id: " + QString::number(i->id) +
+                ". Shape location: " + QString::number(i->startPoint().x()) + " " + QString::number(i->startPoint().y()) +
+                ", " + QString::number(i->endPoint().x()) + " " + QString::number(i->endPoint().y());
         text += "\n";
     }
     FiguresView->clear();
     FiguresView->setText(text);
+}
+
+void PaintScene::loadFromFile(QString fileName)
+{
+
+}
+
+void PaintScene::saveToFile(QString fileName)
+{
+
 }

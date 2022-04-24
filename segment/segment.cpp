@@ -1,6 +1,4 @@
 #include "segment.h"
-#include <QPainter>
-#include <QChar>
 
 Segment::Segment(GlobParams *gl, QPointF point, QObject *parent) :
     Figure(gl,point,parent)

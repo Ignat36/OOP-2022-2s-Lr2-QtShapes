@@ -29,6 +29,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox->addItem("");
     shapes[""] = nullptr;
+    shapes["Треугольник"] = new Triangle(globs, QPointF()); ui->comboBox->addItem("Треугольник");
+    shapes["Прямоугольник"] = new Square(globs, QPointF()); ui->comboBox->addItem("Прямоугольник");
+    shapes["Ромб"] = new Romb(globs, QPointF()); ui->comboBox->addItem("Ромб");
+    shapes["Элипс"] = new Elipse(globs, QPointF()); ui->comboBox->addItem("Элипс");
 
     QFile libs("additionalFigures\\LibrariesPathes.txt");
 
@@ -118,6 +122,7 @@ void MainWindow::on_pushButton_5_clicked()
     ui->graphicsView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     ui->graphicsView->setCursor(Qt::ArrowCursor);
     globs->setAllFlagsFalse();
+    ui->comboBox->setCurrentIndex(0);
 
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &MainWindow::slotTimer);

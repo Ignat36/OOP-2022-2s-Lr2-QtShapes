@@ -29,6 +29,8 @@ public:
     void RedoFigure();
     void UndoFigure();
     void updateFiguresList();
+    void saveToFile(QString fileName);
+    void loadFromFile(QString fileName);
     GlobParams *globs;
     QTextBrowser *FiguresView;
 
